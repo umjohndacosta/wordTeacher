@@ -1,0 +1,38 @@
+html{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+
+}
+.btn1{
+    font-size:2em;
+    min-height:50px;
+    min-width: 50px;
+}
+
+
+.word{
+    font-size:4.5em;
+    min-height:50px;
+    min-width: 50px;
+}
+.defn{
+    font-size:1.25em;
+    font-style: italic;
+    min-height:50px;
+    min-width: 300px;
+}
+
+.correct{
+    color: green;
+}
+
+.incorrect{
+    color: red;
+}
+
+
+.ticker {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    font-size:4em;
+}

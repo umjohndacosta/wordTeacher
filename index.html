@@ -1,0 +1,58 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Education Test</title>
+</head>
+<link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+<body>
+	<div id="wordPanel" class="word">
+
+	</div>
+	<div id="definitionPanel" class="defn">
+
+	</div>
+
+	<button id="btnWordChange" class="btn1">Next</button>
+	<button id="btnSayIt" class="btn1">Say It</button>
+	<div></div>
+	<div id="scoreCorrect" class="ticker correct">
+		0
+	</div>
+	<div id="scoreIncorrect" class="ticker incorrect">
+		0
+	</div>
+
+	<div id="numberAttempted" class="ticker attempted">
+		0
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+<script src="js/words.js" language="javascript" type="text/javascript">
+</script>
+<script>
+	var currentWord = null;
+	var showWord = function () {
+		var word = x.getRandomWord();
+		currentWord = word;
+		$('#wordPanel').html(word.word);
+		$('#definitionPanel').html(word.definition);
+	}
+
+	$('#btnWordChange').click(function () {
+		showWord();
+	});
+
+	$('#btnSayIt').click(function () {
+		responsiveVoice.speak(currentWord.word);
+	})
+
+
+// https://cloud.google.com/speech/
+
+</script>
+
+
+</html>
