@@ -1,4 +1,4 @@
-var x =   function () {
+var x = function () {
     var _wordList = [{
             'word': 'the',
             'definition': 'specifies, or makes particular'
@@ -257,25 +257,41 @@ var x =   function () {
         },
     ]
 
+    // var sightWords = {
+    //     'prek': [{
+    //             word: 'a'
+    //         }, {
+    //             word: 'and'
+    //         }
+    //         , away, big, blue, can, come, down, find,
+    //         for, funny, go, help, here, I, in , is, it, jump, little, look, make, me, my, not, one, play, red, run, said, see, the, three, to, two, up, we, where, yellow, you
+
+    //     ]
+
+
+    // }
+
     getRandomArbitrary = function (min, max) {
         return Math.random() * (max - min) + min;
     };
-    
+
 
     _wordCount = function () {
         return _wordList.length;
     }
-    _randomWord = function(){
+    _randomWord = function () {
         var i = 0;
-        var v = parseInt(getRandomArbitrary(1,_wordCount()))
+        var v = parseInt(getRandomArbitrary(1, _wordCount()))
         //console.log(v);
-        return  _wordList[v];
+        return _wordList[v];
     }
     return {
-        wordCount: function(){
+        wordCount: function () {
             return _wordCount()
-        } ,
+        },
         wordList: _wordList,
-        getRandomWord: function(){return _randomWord()}
+        getRandomWord: function () {
+            return _randomWord()
+        }
     }
 }();

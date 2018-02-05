@@ -15,7 +15,9 @@
 	</div>
 
 	<button id="btnWordChange" class="btn1">Next</button>
-	<button id="btnSayIt" class="btn1">Say It</button>
+	<button id="btnSayWord" class="btn1">Say It</button>
+	<button id="btnSayDefinition" class="btn1">Say Definition</button>
+	<button id="btnShowImages" class="btn1">See It</button>
 	<div></div>
 	<div id="scoreCorrect" class="ticker correct">
 		0
@@ -27,10 +29,31 @@
 	<div id="numberAttempted" class="ticker attempted">
 		0
 	</div>
+	<div id="searchControl">
+
+	</div>
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
-<script src="js/words.js" language="javascript" type="text/javascript">
+<script src="js/words.js" language="javascript" type="text/javascript"></script>
+<script language="Javascript" type="text/javascript">
+    //<!
+    google.load('search', '1');
+    function DoSearch() 
+    {
+        // Create a search control
+        var searchControl = new google.search.SearchControl();
+        searchControl.addSearcher(new google.search.WebSearch());
+
+        searchControl.draw(document.getElementById("searchcontrol"));
+
+        // execute an inital search
+        searchControl.execute(currentWord.word);
+    }
+    //]]>
 </script>
 <script>
 	var currentWord = null;
@@ -45,14 +68,25 @@
 		showWord();
 	});
 
-	$('#btnSayIt').click(function () {
+	$('#btnSayWord').click(function () {
 		responsiveVoice.speak(currentWord.word);
 	})
+	$('#btnSayDefinition').click(function () {
+		responsiveVoice.speak(currentWord.definition);
+	})
 
+	$('#btnShowImages').click(function () {
+		DoSearch() ;
+		//responsiveVoice.speak(currentWord.definition);
+	})
+	/*
+	
+	https://cloud.google.com/speech/
+	http://www.sightwords.com/sight-words/dolch/#lists
+	http://www.sightwords.com/pdfs/word_lists/dolch_prek.pdf
 
-// https://cloud.google.com/speech/
-
-</script>
+	*/
+	</script>
 
 
 </html>
