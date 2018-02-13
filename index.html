@@ -7,6 +7,22 @@
 <link href="css/styles.css" rel="stylesheet" type="text/css" />
 
 <body>
+	<div id="app">
+		{{ message }} from Vue.
+		<div class="word">{{currentWord.word}}</div>
+		<div class="defn">{{currentWord.definition}}</div>
+		<button id="next" @click='getRandomWord'>Next Word (vue)</button>
+		<button id="next" @click='sayWord'>Say Word (vue)</button>
+		<button id="next" @click='sayDefinition'>Say Defintion (vue)</button>
+		<ul>
+			<li v-for='word in words'> {{ word.word}} | Displayed {{ word.displayed }}
+
+					| assisted {{ word.assisted }}
+					| defined {{ word.defined }}
+			</li>
+		</ul>
+	</div>
+
 	<div id="wordPanel" class="word">
 
 	</div>
@@ -35,58 +51,122 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+<script src="js/vue.min.js" language="javascript" type="text/javascript"></script>
+
 <script src="js/words.js" language="javascript" type="text/javascript"></script>
 <script language="Javascript" type="text/javascript">
-    //<!
-    google.load('search', '1');
-    function DoSearch() 
-    {
-        // Create a search control
-        var searchControl = new google.search.SearchControl();
-        searchControl.addSearcher(new google.search.WebSearch());
+	//<!
+	google.load('search', '1');
+	function DoSearch() {
+		// Create a search control
+		var searchControl = new google.search.SearchControl();
+		searchControl.addSearcher(new google.search.WebSearch());
 
-        searchControl.draw(document.getElementById("searchcontrol"));
+		searchControl.draw(document.getElementById("searchcontrol"));
 
-        // execute an inital search
-        searchControl.execute(currentWord.word);
-    }
+		// execute an inital search
+		searchControl.execute(currentWord.word);
+	}
     //]]>
 </script>
 <script>
-	var currentWord = null;
-	var showWord = function () {
-		var word = x.getRandomWord();
-		currentWord = word;
-		$('#wordPanel').html(word.word);
-		$('#definitionPanel').html(word.definition);
-	}
+	$(document).ready(function () {
+		console.log('ready');
+		if (x) {
+			x.init();
+		}
+		var currentWord = null;
 
-	$('#btnWordChange').click(function () {
-		showWord();
-	});
+		var showWord = function () {
+			var word = x.getRandomWord();
+			currentWord = word;
+			$('#wordPanel').html(word.word);
+			$('#definitionPanel').html(word.definition);
+		}
 
-	$('#btnSayWord').click(function () {
-		responsiveVoice.speak(currentWord.word);
-	})
-	$('#btnSayDefinition').click(function () {
-		responsiveVoice.speak(currentWord.definition);
-	})
+		$('#btnWordChange').click(function () {
+			showWord();
+		});
 
-	$('#btnShowImages').click(function () {
-		DoSearch() ;
-		//responsiveVoice.speak(currentWord.definition);
-	})
-	/*
+		$('#btnSayWord').click(function () {
+			responsiveVoice.speak(currentWord.word);
+		})
+		$('#btnSayDefinition').click(function () {
+			responsiveVoice.speak(currentWord.definition);
+		})
+
+		$('#btnShowImages').click(function () {
+			DoSearch();
+			//responsiveVoice.speak(currentWord.definition);
+		})
+		/*
+		
 	
-	https://cloud.google.com/speech/
-	http://www.sightwords.com/sight-words/dolch/#lists
-	http://www.sightwords.com/pdfs/word_lists/dolch_prek.pdf
+		TODO: find sentences with each word
+		TODO: show images of each word (google image search)
+		TODO: show videos < 10 seconds of sentences with each word
+		TODO: captcha for images with the item in it? charity / 501(c)3
+		TODO: speeck to text to grade user
+	
+	
+		https://cloud.google.com/speech/
+		http://www.sightwords.com/sight-words/dolch/#lists
+		http://www.sightwords.com/pdfs/word_lists/dolch_prek.pdf
+	
+	
+	
+		https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
+	
+	
+		https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
+	
+		speechSynthesis.getVoices().forEach(function(voice) {
+		console.log(voice.name, voice.default ? voice.default :'');
+		});
+	
+		*/
 
-	*/
-	</script>
+
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello world!',
+				currentWord: x.currentWord,
+				words: x.wordList,
+				correct: 0,
+				incorrect: 0,
+				assisted: 0,
+				defined: 0,
+				attempted: 0
+			},
+			methods: {
+				getRandomWord: function () {
+					this.currentWord = x.getRandomWord();
+					if (this.currentWord.displayed) {
+						this.currentWord.displayed += 1;
+					}
+					else {
+						this.currentWord.displayed = 1;
+					}
+				},
+				sayWord: function () {
+					this.currentWord.assisted+=1;
+					responsiveVoice.speak(this.currentWord.word);
+				},
+				sayDefinition: function () {
+					this.currentWord.defined+=1;
+					responsiveVoice.speak(this.currentWord.definition);
+				}
+
+			}
+		})
+
+
+	}); // end of document.onready
+
+</script>
 
 
 </html>

@@ -275,7 +275,6 @@ var x = function () {
         return Math.random() * (max - min) + min;
     };
 
-
     _wordCount = function () {
         return _wordList.length;
     }
@@ -290,8 +289,36 @@ var x = function () {
             return _wordCount()
         },
         wordList: _wordList,
+        currentWord: null,
         getRandomWord: function () {
             return _randomWord()
+        },
+        init : function(){
+            this.currentWord = this.getRandomWord();
+            this.wordList.forEach(function(item){
+                
+                if(!item.displayed){
+                    item.displayed = 0;
+                }
+                if(!item.assisted){
+                    item.assisted = 0;
+                }
+                if(!item.defined){
+                    item.defined = 0;
+                }
+
+                if(!item.attempted){
+                    item.attempted = 0;
+                }
+
+                if(!item.correct){
+                    item.correct = 0;
+                }
+
+                if(!item.incorrect){
+                    item.incorrect = 0;
+                }
+            });
         }
     }
 }();
