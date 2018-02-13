@@ -1,6 +1,6 @@
 html{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:1.25em;
 }
 .btn1{
     font-size:2em;
@@ -35,4 +35,19 @@ html{
     width: 200px;
     height: 200px;
     font-size:4em;
+}
+
+.list-demo{
+    display:inline-block;
+    list-style: none;
+}
+.score-small{
+    width: 25px;
+    height:25px;
+    min-width: 25px;
+    min-height:25px;
+    
+}
+.h-lvl-01{
+    font-weight:bold;
 }

@@ -9,27 +9,47 @@
 <body>
 	<div id="app">
 		{{ message }} from Vue.
+		<div @click='toggleScoreBoard'><a id="toggleScoreBoard">Show / Hide Scoreboard</a></div>
 		<div class="word">{{currentWord.word}}</div>
 		<div class="defn">{{currentWord.definition}}</div>
-		<button id="next" @click='getRandomWord'>Next Word (vue)</button>
-		<button id="next" @click='sayWord'>Say Word (vue)</button>
-		<button id="next" @click='sayDefinition'>Say Defintion (vue)</button>
-		<ul>
-			<li v-for='word in words'> {{ word.word}} | Displayed {{ word.displayed }}
-
-					| assisted {{ word.assisted }}
-					| defined {{ word.defined }}
+		<div>
+			<button id="next" @click='getRandomWord'>Next Word (vue)</button>
+			<button id="next" @click='sayWord'>Say Word (vue)</button>
+			<button id="next" @click='sayDefinition'>Say Defintion (vue)</button>
+		</div>
+		<ul class="list-demo">
+				<div id="score-board-header">
+			<li class="h-lvl-01">
+				<span class="score-small">{{ attempted}} || </span>
+				<span class="score-small">{{ assisted}} || </span>
+				<span class="score-small">{{ defined}} || </span>
+				<span>&nbsp;</span>
+				<span>&nbsp;</span>
 			</li>
+			<li class="h-lvl-01">
+				<span class="score-small">disp || </span>
+				<span class="score-small">spk || </span>
+				<span class="score-small">def || </span>
+				<span>Word</span>
+				<span>Definition</span>
+			</li>
+		</div>
+			<div id="score-board-scores">
+			<li v-for='word in words'>
+				<span class="score-small">{{ word.displayed }} || </span>
+				<span class="score-small">{{ word.assisted }} || </span>
+				<span class="score-small">{{ word.defined }} || </span>
+				<span>|| {{ word.word}} </span>
+				<span> || {{ word.definition }} </span>
+			</li>
+			</div>
 		</ul>
 	</div>
 
-	<div id="wordPanel" class="word">
-
+	<!-- <div id="wordPanel" class="word">
 	</div>
 	<div id="definitionPanel" class="defn">
-
 	</div>
-
 	<button id="btnWordChange" class="btn1">Next</button>
 	<button id="btnSayWord" class="btn1">Say It</button>
 	<button id="btnSayDefinition" class="btn1">Say Definition</button>
@@ -45,7 +65,7 @@
 	<div id="numberAttempted" class="ticker attempted">
 		0
 	</div>
-	<div id="searchControl">
+	<div id="searchControl"> -->
 
 	</div>
 </body>
@@ -78,6 +98,30 @@
 			x.init();
 		}
 		var currentWord = null;
+		
+		var toggleScoreBoard = function(){
+				var _a = $('#score-board-header');
+				var _b = $('#score-board-scores');
+				if(_a.css('display') == 'none'){
+					_a.show();
+					_b.show();
+				}
+				else{
+					_a.hide();
+					_b.hide();
+				}
+				// if($('#theid').css('display') == 'none'){ 
+				// $('#theid').show('slow'); 
+				// } else { 
+				// $('#theid').hide('slow'); 
+				// }
+
+
+		}
+		
+		$('#toggleScoreBoard').click(function(){
+			toggleScoreBoard();
+		});
 
 		var showWord = function () {
 			var word = x.getRandomWord();
@@ -150,15 +194,19 @@
 					else {
 						this.currentWord.displayed = 1;
 					}
+					this.attempted+=1;
 				},
 				sayWord: function () {
-					this.currentWord.assisted+=1;
+					this.currentWord.assisted += 1;
+					this.assisted +=1;
 					responsiveVoice.speak(this.currentWord.word);
 				},
 				sayDefinition: function () {
-					this.currentWord.defined+=1;
+					this.currentWord.defined += 1;
+					this.defined += 1;
 					responsiveVoice.speak(this.currentWord.definition);
-				}
+				},
+				
 
 			}
 		})
