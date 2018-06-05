@@ -41,6 +41,9 @@
 				<span class="score-small">{{ word.defined }} || </span>
 				<span>|| {{ word.word}} </span>
 				<span> || {{ word.definition }} </span>
+				<!-- <li v-for='sentence in sentences'>
+					<div>{{sentence.text}}</div>
+				</li> -->
 			</li>
 			</div>
 		</ul>
@@ -98,7 +101,7 @@
 			x.init();
 		}
 		var currentWord = null;
-		
+
 		var toggleScoreBoard = function(){
 				var _a = $('#score-board-header');
 				var _b = $('#score-board-scores');
@@ -110,15 +113,15 @@
 					_a.hide();
 					_b.hide();
 				}
-				// if($('#theid').css('display') == 'none'){ 
-				// $('#theid').show('slow'); 
-				// } else { 
-				// $('#theid').hide('slow'); 
+				// if($('#theid').css('display') == 'none'){
+				// $('#theid').show('slow');
+				// } else {
+				// $('#theid').hide('slow');
 				// }
 
 
 		}
-		
+
 		$('#toggleScoreBoard').click(function(){
 			toggleScoreBoard();
 		});
@@ -146,30 +149,30 @@
 			//responsiveVoice.speak(currentWord.definition);
 		})
 		/*
-		
-	
+
+
 		TODO: find sentences with each word
 		TODO: show images of each word (google image search)
 		TODO: show videos < 10 seconds of sentences with each word
 		TODO: captcha for images with the item in it? charity / 501(c)3
 		TODO: speeck to text to grade user
-	
-	
+
+
 		https://cloud.google.com/speech/
 		http://www.sightwords.com/sight-words/dolch/#lists
 		http://www.sightwords.com/pdfs/word_lists/dolch_prek.pdf
-	
-	
-	
+
+
+
 		https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
-	
-	
+
+
 		https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
-	
+
 		speechSynthesis.getVoices().forEach(function(voice) {
 		console.log(voice.name, voice.default ? voice.default :'');
 		});
-	
+
 		*/
 
 
@@ -206,7 +209,7 @@
 					this.defined += 1;
 					responsiveVoice.speak(this.currentWord.definition);
 				},
-				
+
 
 			}
 		})

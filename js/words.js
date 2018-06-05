@@ -13,7 +13,9 @@ var x = function () {
     },
     {
         'word': 'are',
-        'definition': 'present tense of the word be, or a metric unit'
+        'definition': 'present tense of the word be, or a metric unit',
+        'sentences': [{id:1, text:'Who are you?'},{id:2, text:'Where are you?'},{id:3, text:'Are you going to school today?'}]
+
     },
     {
         'word': 'but',
@@ -282,6 +284,7 @@ var x = function () {
         var i = 0;
         var v = parseInt(getRandomArbitrary(1, _wordCount()))
         //console.log(v);
+        //return wordList(3);
         return _wordList[v];
     }
     return {
